@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         user.setEmail(signupRequest.getEmail());
         user.setUsername(signupRequest.getUsername());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
-        user.setRole(Role.USER);
+        user.setRole(Role.ADMIN);
         System.out.println("User to be created: " + user.getEmail());
         return userRepository.save(user);
     }
@@ -66,6 +66,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         authResponse.setEmail(user.getEmail());
         authResponse.setRole(user.getRole());
         authResponse.setToken(jwt);
+        authResponse.setNom(user.getUsername());
         authResponse.setRefreshToken(refreshToken);
         return authResponse;
     }
